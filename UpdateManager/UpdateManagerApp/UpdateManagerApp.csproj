@@ -12,6 +12,9 @@
   <ItemGroup>
     <Compile Include="MainForm.cs" />
     <Compile Include="Components\InitializeComponent.cs" />
+    <Compile Include="Components\ProgressForm.cs" />
+    <Compile Include="Components\ApplicationInfo.cs" />
+    <Compile Include="Components\DarkModeColors.cs" />
     <Compile Include="Program.cs" />
     <PackageReference Include="Microsoft.VisualBasic" Version="10.3.0" />
   </ItemGroup>
