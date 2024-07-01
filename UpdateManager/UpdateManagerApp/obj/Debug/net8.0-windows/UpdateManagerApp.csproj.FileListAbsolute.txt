@@ -1,0 +1,15 @@
+C:\Users\Administrator\Documents\GitHub\WinUpdater\UpdateManager\UpdateManagerApp\obj\Debug\net8.0-windows\UpdateManagerApp.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Administrator\Documents\GitHub\WinUpdater\UpdateManager\UpdateManagerApp\obj\Debug\net8.0-windows\UpdateManagerApp.AssemblyInfoInputs.cache
+C:\Users\Administrator\Documents\GitHub\WinUpdater\UpdateManager\UpdateManagerApp\obj\Debug\net8.0-windows\UpdateManagerApp.AssemblyInfo.cs
+C:\Users\Administrator\Documents\GitHub\WinUpdater\UpdateManager\UpdateManagerApp\obj\Debug\net8.0-windows\UpdateManagerApp.csproj.CoreCompileInputs.cache
+C:\Users\Administrator\Documents\GitHub\WinUpdater\UpdateManager\UpdateManagerApp\obj\Debug\net8.0-windows\UpdateManagerApp.sourcelink.json
+C:\Users\Administrator\Documents\GitHub\WinUpdater\UpdateManager\UpdateManagerApp\bin\Debug\net8.0-windows\UpdateManagerApp.exe
+C:\Users\Administrator\Documents\GitHub\WinUpdater\UpdateManager\UpdateManagerApp\bin\Debug\net8.0-windows\UpdateManagerApp.deps.json
+C:\Users\Administrator\Documents\GitHub\WinUpdater\UpdateManager\UpdateManagerApp\bin\Debug\net8.0-windows\UpdateManagerApp.runtimeconfig.json
+C:\Users\Administrator\Documents\GitHub\WinUpdater\UpdateManager\UpdateManagerApp\bin\Debug\net8.0-windows\UpdateManagerApp.dll
+C:\Users\Administrator\Documents\GitHub\WinUpdater\UpdateManager\UpdateManagerApp\bin\Debug\net8.0-windows\UpdateManagerApp.pdb
+C:\Users\Administrator\Documents\GitHub\WinUpdater\UpdateManager\UpdateManagerApp\obj\Debug\net8.0-windows\UpdateManagerApp.dll
+C:\Users\Administrator\Documents\GitHub\WinUpdater\UpdateManager\UpdateManagerApp\obj\Debug\net8.0-windows\refint\UpdateManagerApp.dll
+C:\Users\Administrator\Documents\GitHub\WinUpdater\UpdateManager\UpdateManagerApp\obj\Debug\net8.0-windows\UpdateManagerApp.pdb
+C:\Users\Administrator\Documents\GitHub\WinUpdater\UpdateManager\UpdateManagerApp\obj\Debug\net8.0-windows\UpdateManagerApp.genruntimeconfig.cache
+C:\Users\Administrator\Documents\GitHub\WinUpdater\UpdateManager\UpdateManagerApp\obj\Debug\net8.0-windows\ref\UpdateManagerApp.dll

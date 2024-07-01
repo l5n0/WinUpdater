@@ -1,0 +1,5 @@
+C:\Users\Administrator\Documents\GitHub\WinUpdater\UpdateManager\UpdateManagerApp\obj\Debug\net7.0-windows\UpdateManagerApp.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Administrator\Documents\GitHub\WinUpdater\UpdateManager\UpdateManagerApp\obj\Debug\net7.0-windows\UpdateManagerApp.AssemblyInfoInputs.cache
+C:\Users\Administrator\Documents\GitHub\WinUpdater\UpdateManager\UpdateManagerApp\obj\Debug\net7.0-windows\UpdateManagerApp.AssemblyInfo.cs
+C:\Users\Administrator\Documents\GitHub\WinUpdater\UpdateManager\UpdateManagerApp\obj\Debug\net7.0-windows\UpdateManagerApp.csproj.CoreCompileInputs.cache
+C:\Users\Administrator\Documents\GitHub\WinUpdater\UpdateManager\UpdateManagerApp\obj\Debug\net7.0-windows\UpdateManagerApp.sourcelink.json
