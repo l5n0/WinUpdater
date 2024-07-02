@@ -38,14 +38,10 @@ namespace UpdateManagerApp
 
         private void btnUpdateSpecificApplication_Click(object? sender, EventArgs e)
         {
-            List<ApplicationInfo> applications = GetUpgradableApplications();
-            if (applications.Count == 0)
-            {
-                MessageBox.Show("No applications available for update.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                return;
-            }
+            List<ApplicationInfo> allApplications = GetInstalledApplications();
+            List<ApplicationInfo> updatableApplications = GetUpgradableApplications();
 
-            ShowApplicationSelectionDialog(applications);
+            ShowApplicationSelectionDialog(allApplications, updatableApplications);
         }
 
         private void btnUpdateWindowsServicesAndDrivers_Click(object? sender, EventArgs e)
@@ -115,6 +111,45 @@ namespace UpdateManagerApp
             }
         }
 
+        private List<ApplicationInfo> GetInstalledApplications()
+        {
+            List<ApplicationInfo> applications = new List<ApplicationInfo>();
+            ProcessStartInfo startInfo = new ProcessStartInfo()
+            {
+                FileName = "powershell.exe",
+                Arguments = "-NoProfile -ExecutionPolicy Bypass -Command \"Get-StartApps | Select-Object Name\"",
+                UseShellExecute = false,
+                RedirectStandardOutput = true,
+                RedirectStandardError = true,
+                CreateNoWindow = true
+            };
+
+            using (Process process = new Process() { StartInfo = startInfo })
+            {
+                process.Start();
+                string output = process.StandardOutput.ReadToEnd();
+                process.WaitForExit();
+
+                if (process.ExitCode == 0)
+                {
+                    string[] lines = output.Split(new[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
+                    foreach (string line in lines.Skip(3)) // Skip header
+                    {
+                        if (!string.IsNullOrWhiteSpace(line))
+                        {
+                            applications.Add(new ApplicationInfo
+                            {
+                                Name = line.Trim(),
+                                CurrentVersion = "Unknown",
+                                AvailableVersion = ""
+                            });
+                        }
+                    }
+                }
+            }
+            return applications;
+        }
+
         private List<ApplicationInfo> GetUpgradableApplications()
         {
             List<ApplicationInfo> applications = new List<ApplicationInfo>();
@@ -166,7 +201,7 @@ namespace UpdateManagerApp
             return applications;
         }
 
-        private void ShowApplicationSelectionDialog(List<ApplicationInfo> applications)
+        private void ShowApplicationSelectionDialog(List<ApplicationInfo> allApplications, List<ApplicationInfo> updatableApplications)
         {
             Form dialog = new Form();
             dialog.Width = 800;
@@ -180,7 +215,7 @@ namespace UpdateManagerApp
                 Dock = DockStyle.Top,
                 Height = 250,
                 AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill,
-                DataSource = applications,
+                DataSource = allApplications,
                 BackgroundColor = DarkModeColors.ControlColor,
                 ForeColor = DarkModeColors.ForegroundColor,
                 GridColor = DarkModeColors.ForegroundColor,
@@ -193,7 +228,7 @@ namespace UpdateManagerApp
                 Dock = DockStyle.Bottom,
                 Height = 250,
                 AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill,
-                DataSource = applications.Where(app => app.HasUpdate).ToList(),
+                DataSource = updatableApplications,
                 BackgroundColor = DarkModeColors.ControlColor,
                 ForeColor = DarkModeColors.ForegroundColor,
                 GridColor = DarkModeColors.ForegroundColor,
