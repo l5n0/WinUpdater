@@ -1,25 +1,45 @@
 using System;
-using System.Diagnostics;
-using System.Windows.Forms;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Linq;
+using System.Windows.Forms;
+using MaterialSkin;
+using MaterialSkin.Controls;
 
 namespace UpdateManagerApp
 {
-    public partial class MainForm : Form
+    public partial class MainForm : MaterialForm
     {
-        private Button btnUpdateAllApplications;
-        private Button btnUpdateSpecificApplication;
-        private Button btnUpdateWindowsServicesAndDrivers;
-        private Button btnUpdateDeviceDrivers;
+        private MaterialButton btnUpdateAllApplications;
+        private MaterialButton btnUpdateSpecificApplication;
+        private MaterialButton btnUpdateWindowsServicesAndDrivers;
+        private MaterialButton btnUpdateDeviceDrivers;
 
         public MainForm()
         {
+            btnUpdateAllApplications = new MaterialButton();
+            btnUpdateSpecificApplication = new MaterialButton();
+            btnUpdateWindowsServicesAndDrivers = new MaterialButton();
+            btnUpdateDeviceDrivers = new MaterialButton();
+
             InitializeComponent();
+            InitializeMaterialSkin();
         }
 
-        private void btnUpdateAllApplications_Click(object? sender, EventArgs e)
+        private void InitializeMaterialSkin()
+        {
+            var materialSkinManager = MaterialSkinManager.Instance;
+            materialSkinManager.AddFormToManage(this);
+            materialSkinManager.Theme = MaterialSkinManager.Themes.DARK;
+            materialSkinManager.ColorScheme = new ColorScheme(
+                Primary.BlueGrey800, Primary.BlueGrey900,
+                Primary.BlueGrey500, Accent.LightBlue200,
+                TextShade.WHITE
+            );
+        }
+
+        private void btnUpdateAllApplications_Click(object sender, EventArgs e)
         {
             ProgressForm progressForm = new ProgressForm();
             BackgroundWorker worker = new BackgroundWorker();
@@ -36,7 +56,7 @@ namespace UpdateManagerApp
             progressForm.ShowDialog();
         }
 
-        private void btnUpdateSpecificApplication_Click(object? sender, EventArgs e)
+        private void btnUpdateSpecificApplication_Click(object sender, EventArgs e)
         {
             List<ApplicationInfo> allApplications = GetInstalledApplications();
             List<ApplicationInfo> updatableApplications = GetUpgradableApplications();
@@ -44,7 +64,7 @@ namespace UpdateManagerApp
             ShowApplicationSelectionDialog(allApplications, updatableApplications);
         }
 
-        private void btnUpdateWindowsServicesAndDrivers_Click(object? sender, EventArgs e)
+        private void btnUpdateWindowsServicesAndDrivers_Click(object sender, EventArgs e)
         {
             ProgressForm progressForm = new ProgressForm();
             BackgroundWorker worker = new BackgroundWorker();
@@ -61,7 +81,7 @@ namespace UpdateManagerApp
             progressForm.ShowDialog();
         }
 
-        private void btnUpdateDeviceDrivers_Click(object? sender, EventArgs e)
+        private void btnUpdateDeviceDrivers_Click(object sender, EventArgs e)
         {
             ProgressForm progressForm = new ProgressForm();
             BackgroundWorker worker = new BackgroundWorker();
@@ -203,78 +223,61 @@ namespace UpdateManagerApp
 
         private void ShowApplicationSelectionDialog(List<ApplicationInfo> allApplications, List<ApplicationInfo> updatableApplications)
         {
-            Form dialog = new Form();
-            dialog.Width = 800;
-            dialog.Height = 600;
-            dialog.Text = "Select an Application";
-            dialog.BackColor = DarkModeColors.BackgroundColor;
-            dialog.ForeColor = DarkModeColors.ForegroundColor;
-
-            DataGridView allAppsGridView = new DataGridView
+            using (var dialog = new Form())
             {
-                Dock = DockStyle.Top,
-                Height = 250,
-                AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill,
-                DataSource = allApplications,
-                BackgroundColor = DarkModeColors.ControlColor,
-                ForeColor = DarkModeColors.ForegroundColor,
-                GridColor = DarkModeColors.ForegroundColor,
-                ColumnHeadersDefaultCellStyle = new DataGridViewCellStyle { BackColor = DarkModeColors.ControlColor, ForeColor = DarkModeColors.ForegroundColor },
-                DefaultCellStyle = new DataGridViewCellStyle { BackColor = DarkModeColors.ControlColor, ForeColor = DarkModeColors.ForegroundColor }
-            };
+                dialog.Text = "Select Application to Update";
+                dialog.Size = new System.Drawing.Size(600, 400);
 
-            DataGridView updatesGridView = new DataGridView
-            {
-                Dock = DockStyle.Bottom,
-                Height = 250,
-                AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill,
-                DataSource = updatableApplications,
-                BackgroundColor = DarkModeColors.ControlColor,
-                ForeColor = DarkModeColors.ForegroundColor,
-                GridColor = DarkModeColors.ForegroundColor,
-                ColumnHeadersDefaultCellStyle = new DataGridViewCellStyle { BackColor = DarkModeColors.ControlColor, ForeColor = DarkModeColors.ForegroundColor },
-                DefaultCellStyle = new DataGridViewCellStyle { BackColor = DarkModeColors.ControlColor, ForeColor = DarkModeColors.ForegroundColor }
-            };
-
-            Button updateButton = new Button
-            {
-                Text = "Update Selected Application",
-                Dock = DockStyle.Bottom,
-                Height = 30,
-                DialogResult = DialogResult.OK,
-                BackColor = DarkModeColors.ButtonColor,
-                ForeColor = DarkModeColors.ForegroundColor
-            };
-
-            updateButton.Click += (s, e) =>
-            {
-                if (allAppsGridView.SelectedRows.Count > 0)
+                var allAppsGridView = new DataGridView
                 {
-                    ApplicationInfo selectedApp = allAppsGridView.SelectedRows[0].DataBoundItem as ApplicationInfo;
-                    if (selectedApp != null)
+                    DataSource = allApplications,
+                    Dock = DockStyle.Top,
+                    Height = 150
+                };
+
+                var updatesGridView = new DataGridView
+                {
+                    DataSource = updatableApplications,
+                    Dock = DockStyle.Bottom,
+                    Height = 150
+                };
+
+                var updateButton = new MaterialButton
+                {
+                    Text = "Update Selected Application",
+                    Dock = DockStyle.Fill
+                };
+
+                updateButton.Click += (s, e) =>
+                {
+                    if (updatesGridView.SelectedRows.Count > 0)
                     {
-                        ProgressForm progressForm = new ProgressForm();
-                        BackgroundWorker worker = new BackgroundWorker();
-                        worker.WorkerReportsProgress = true;
-                        worker.DoWork += (s, args) => ExecutePowerShellScript("PowerShellScripts/UpdateSpecificApplication.ps1", worker, $"-appName \"{selectedApp.Name}\"");
-                        worker.ProgressChanged += (s, args) =>
+                        var selectedApp = updatesGridView.SelectedRows[0].DataBoundItem as ApplicationInfo;
+                        if (selectedApp != null)
                         {
-                            progressForm.ProgressBar.Value = args.ProgressPercentage;
-                            progressForm.StatusLabel.Text = args.UserState?.ToString();
-                        };
-                        worker.RunWorkerCompleted += (s, args) => progressForm.Close();
-                        worker.RunWorkerAsync();
+                            ProgressForm progressForm = new ProgressForm();
+                            BackgroundWorker worker = new BackgroundWorker();
+                            worker.WorkerReportsProgress = true;
+                            worker.DoWork += (sender, args) => ExecutePowerShellScript("PowerShellScripts/UpdateSpecificApplication.ps1", worker, $"\"{selectedApp.Name}\"");
+                            worker.ProgressChanged += (sender, args) =>
+                            {
+                                progressForm.ProgressBar.Value = args.ProgressPercentage;
+                                progressForm.StatusLabel.Text = args.UserState?.ToString();
+                            };
+                            worker.RunWorkerCompleted += (sender, args) => progressForm.Close();
+                            worker.RunWorkerAsync();
 
-                        progressForm.ShowDialog();
+                            progressForm.ShowDialog();
+                        }
                     }
-                }
-            };
+                };
 
-            dialog.Controls.Add(allAppsGridView);
-            dialog.Controls.Add(updatesGridView);
-            dialog.Controls.Add(updateButton);
+                dialog.Controls.Add(allAppsGridView);
+                dialog.Controls.Add(updatesGridView);
+                dialog.Controls.Add(updateButton);
 
-            dialog.ShowDialog();
+                dialog.ShowDialog();
+            }
         }
     }
 }

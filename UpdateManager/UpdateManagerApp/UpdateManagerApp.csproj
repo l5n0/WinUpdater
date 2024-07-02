@@ -15,7 +15,9 @@
     <Compile Include="Components\ProgressForm.cs" />
     <Compile Include="Components\ApplicationInfo.cs" />
     <Compile Include="Components\DarkModeColors.cs" />
+    <Compile Include="Components\MaterialSkinManagerSetup.cs" />
     <Compile Include="Program.cs" />
+    <PackageReference Include="MaterialSkin.2" Version="2.2.0" />
     <PackageReference Include="Microsoft.VisualBasic" Version="10.3.0" />
   </ItemGroup>
 

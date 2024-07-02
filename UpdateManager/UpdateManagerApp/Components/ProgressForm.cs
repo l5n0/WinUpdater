@@ -1,15 +1,21 @@
+using MaterialSkin;
+using MaterialSkin.Controls;
 using System.Windows.Forms;
 
 namespace UpdateManagerApp
 {
-    public partial class ProgressForm : Form
+    public partial class ProgressForm : MaterialForm
     {
         private ProgressBar progressBar;
         private Label statusLabel;
 
         public ProgressForm()
         {
+            progressBar = new ProgressBar();
+            statusLabel = new Label();
+
             InitializeComponent();
+            InitializeMaterialSkin();
         }
 
         public ProgressBar ProgressBar => progressBar;
@@ -17,12 +23,7 @@ namespace UpdateManagerApp
 
         private void InitializeComponent()
         {
-            this.progressBar = new System.Windows.Forms.ProgressBar();
-            this.statusLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
-
-            this.BackColor = DarkModeColors.BackgroundColor;
-            this.ForeColor = DarkModeColors.ForegroundColor;
 
             // 
             // progressBar
@@ -31,7 +32,6 @@ namespace UpdateManagerApp
             this.progressBar.Name = "progressBar";
             this.progressBar.Size = new System.Drawing.Size(360, 23);
             this.progressBar.TabIndex = 0;
-            this.progressBar.BackColor = DarkModeColors.ControlColor;
 
             // 
             // statusLabel
@@ -53,6 +53,18 @@ namespace UpdateManagerApp
             this.Text = "Updating Applications";
             this.ResumeLayout(false);
             this.PerformLayout();
+        }
+
+        private void InitializeMaterialSkin()
+        {
+            var materialSkinManager = MaterialSkinManager.Instance;
+            materialSkinManager.AddFormToManage(this);
+            materialSkinManager.Theme = MaterialSkinManager.Themes.DARK;
+            materialSkinManager.ColorScheme = new ColorScheme(
+                Primary.BlueGrey800, Primary.BlueGrey900,
+                Primary.BlueGrey500, Accent.LightBlue200,
+                TextShade.WHITE
+            );
         }
     }
 }

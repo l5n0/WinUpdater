@@ -13,3 +13,6 @@ C:\Users\Administrator\Documents\GitHub\WinUpdater\UpdateManager\UpdateManagerAp
 C:\Users\Administrator\Documents\GitHub\WinUpdater\UpdateManager\UpdateManagerApp\obj\Debug\net8.0-windows\UpdateManagerApp.pdb
 C:\Users\Administrator\Documents\GitHub\WinUpdater\UpdateManager\UpdateManagerApp\obj\Debug\net8.0-windows\UpdateManagerApp.genruntimeconfig.cache
 C:\Users\Administrator\Documents\GitHub\WinUpdater\UpdateManager\UpdateManagerApp\obj\Debug\net8.0-windows\ref\UpdateManagerApp.dll
+C:\Users\Administrator\Documents\GitHub\WinUpdater\UpdateManager\UpdateManagerApp\obj\Debug\net8.0-windows\UpdateManagerApp.csproj.AssemblyReference.cache
+C:\Users\Administrator\Documents\GitHub\WinUpdater\UpdateManager\UpdateManagerApp\bin\Debug\net8.0-windows\MaterialSkin.dll
+C:\Users\Administrator\Documents\GitHub\WinUpdater\UpdateManager\UpdateManagerApp\obj\Debug\net8.0-windows\UpdateMa.CB700E6B.Up2Date
