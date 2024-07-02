@@ -18,9 +18,9 @@ namespace UpdateManagerApp
             // 
             // btnUpdateAllApplications
             // 
-            this.btnUpdateAllApplications.Location = new System.Drawing.Point(50, 30);
+            this.btnUpdateAllApplications.Location = new System.Drawing.Point(50, 80);
             this.btnUpdateAllApplications.Name = "btnUpdateAllApplications";
-            this.btnUpdateAllApplications.Size = new System.Drawing.Size(300, 40);
+            this.btnUpdateAllApplications.Size = new System.Drawing.Size(400, 60);
             this.btnUpdateAllApplications.TabIndex = 0;
             this.btnUpdateAllApplications.Text = "Update All Applications";
             this.btnUpdateAllApplications.UseVisualStyleBackColor = true;
@@ -29,9 +29,9 @@ namespace UpdateManagerApp
             // 
             // btnUpdateSpecificApplication
             // 
-            this.btnUpdateSpecificApplication.Location = new System.Drawing.Point(50, 80);
+            this.btnUpdateSpecificApplication.Location = new System.Drawing.Point(50, 150);
             this.btnUpdateSpecificApplication.Name = "btnUpdateSpecificApplication";
-            this.btnUpdateSpecificApplication.Size = new System.Drawing.Size(300, 40);
+            this.btnUpdateSpecificApplication.Size = new System.Drawing.Size(400, 60);
             this.btnUpdateSpecificApplication.TabIndex = 1;
             this.btnUpdateSpecificApplication.Text = "Update Specific Application";
             this.btnUpdateSpecificApplication.UseVisualStyleBackColor = true;
@@ -40,9 +40,9 @@ namespace UpdateManagerApp
             // 
             // btnUpdateWindowsServicesAndDrivers
             // 
-            this.btnUpdateWindowsServicesAndDrivers.Location = new System.Drawing.Point(50, 130);
+            this.btnUpdateWindowsServicesAndDrivers.Location = new System.Drawing.Point(50, 220);
             this.btnUpdateWindowsServicesAndDrivers.Name = "btnUpdateWindowsServicesAndDrivers";
-            this.btnUpdateWindowsServicesAndDrivers.Size = new System.Drawing.Size(300, 40);
+            this.btnUpdateWindowsServicesAndDrivers.Size = new System.Drawing.Size(400, 60);
             this.btnUpdateWindowsServicesAndDrivers.TabIndex = 2;
             this.btnUpdateWindowsServicesAndDrivers.Text = "Update Windows Services and Drivers";
             this.btnUpdateWindowsServicesAndDrivers.UseVisualStyleBackColor = true;
@@ -51,9 +51,9 @@ namespace UpdateManagerApp
             // 
             // btnUpdateDeviceDrivers
             // 
-            this.btnUpdateDeviceDrivers.Location = new System.Drawing.Point(50, 180);
+            this.btnUpdateDeviceDrivers.Location = new System.Drawing.Point(50, 290);
             this.btnUpdateDeviceDrivers.Name = "btnUpdateDeviceDrivers";
-            this.btnUpdateDeviceDrivers.Size = new System.Drawing.Size(300, 40);
+            this.btnUpdateDeviceDrivers.Size = new System.Drawing.Size(400, 60);
             this.btnUpdateDeviceDrivers.TabIndex = 3;
             this.btnUpdateDeviceDrivers.Text = "Update Device Drivers";
             this.btnUpdateDeviceDrivers.UseVisualStyleBackColor = true;
@@ -62,7 +62,7 @@ namespace UpdateManagerApp
             // 
             // MainForm
             // 
-            this.ClientSize = new System.Drawing.Size(400, 250);
+            this.ClientSize = new System.Drawing.Size(500, 400);
             this.Controls.Add(this.btnUpdateDeviceDrivers);
             this.Controls.Add(this.btnUpdateWindowsServicesAndDrivers);
             this.Controls.Add(this.btnUpdateSpecificApplication);

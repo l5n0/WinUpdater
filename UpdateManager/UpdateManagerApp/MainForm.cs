@@ -226,20 +226,22 @@ namespace UpdateManagerApp
             using (var dialog = new Form())
             {
                 dialog.Text = "Select Application to Update";
-                dialog.Size = new System.Drawing.Size(600, 400);
+                dialog.Size = new System.Drawing.Size(800, 600);
 
                 var allAppsGridView = new DataGridView
                 {
                     DataSource = allApplications,
                     Dock = DockStyle.Top,
-                    Height = 150
+                    Height = 250,
+                    AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill
                 };
 
                 var updatesGridView = new DataGridView
                 {
                     DataSource = updatableApplications,
                     Dock = DockStyle.Bottom,
-                    Height = 150
+                    Height = 250,
+                    AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill
                 };
 
                 var updateButton = new MaterialButton
@@ -272,9 +274,21 @@ namespace UpdateManagerApp
                     }
                 };
 
-                dialog.Controls.Add(allAppsGridView);
-                dialog.Controls.Add(updatesGridView);
-                dialog.Controls.Add(updateButton);
+                var layout = new TableLayoutPanel
+                {
+                    Dock = DockStyle.Fill,
+                    RowCount = 3,
+                    ColumnCount = 1
+                };
+
+                layout.RowStyles.Add(new RowStyle(SizeType.Percent, 40F));
+                layout.RowStyles.Add(new RowStyle(SizeType.Percent, 40F));
+                layout.RowStyles.Add(new RowStyle(SizeType.Percent, 20F));
+                layout.Controls.Add(allAppsGridView, 0, 0);
+                layout.Controls.Add(updatesGridView, 0, 1);
+                layout.Controls.Add(updateButton, 0, 2);
+
+                dialog.Controls.Add(layout);
 
                 dialog.ShowDialog();
             }

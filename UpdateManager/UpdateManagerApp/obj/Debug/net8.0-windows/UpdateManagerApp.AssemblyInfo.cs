@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("UpdateManagerApp")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+a220b9f149d2349c786b7aa92200184434aca05b")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+c6405e1738fbbc809388ce19b37329f8937d7a04")]
 [assembly: System.Reflection.AssemblyProductAttribute("UpdateManagerApp")]
 [assembly: System.Reflection.AssemblyTitleAttribute("UpdateManagerApp")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
