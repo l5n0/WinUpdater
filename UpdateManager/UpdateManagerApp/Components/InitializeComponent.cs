@@ -1,6 +1,4 @@
-using MaterialSkin;
 using MaterialSkin.Controls;
-using System.Windows.Forms;
 
 namespace UpdateManagerApp
 {
@@ -71,5 +69,10 @@ namespace UpdateManagerApp
             this.Text = "Update Manager";
             this.ResumeLayout(false);
         }
+
+        private MaterialButton btnUpdateAllApplications;
+        private MaterialButton btnUpdateSpecificApplication;
+        private MaterialButton btnUpdateWindowsServicesAndDrivers;
+        private MaterialButton btnUpdateDeviceDrivers;
     }
 }

@@ -1,6 +1,5 @@
 using MaterialSkin;
 using MaterialSkin.Controls;
-using System.Windows.Forms;
 
 namespace UpdateManagerApp
 {
@@ -16,15 +15,6 @@ namespace UpdateManagerApp
                 Primary.BlueGrey500, Accent.LightBlue200,
                 TextShade.WHITE
             );
-        }
-
-        public static MaterialButton CreateMaterialButton(string text)
-        {
-            return new MaterialButton
-            {
-                Text = text,
-                AutoSize = true
-            };
         }
     }
 }
