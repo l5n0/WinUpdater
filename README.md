@@ -1,7 +1,9 @@
 # WinUpdater
 Windows Updater
 
-I built this application for people to update the appications they have to the newest version. At the moment it works but the GUI doenst look good at all. This will be the next step to make the GUI useable.
+Please don't be so hard on me this is my first software.
+
+I built this application so that people can update the applications they have to the latest version. At the moment it works, but the GUI doesn't look good. This will be the next step to make the GUI usable.
 
 # Installation Guide for UpdateManagerApp
 
