@@ -1,10 +1,10 @@
-using MaterialSkin.Controls;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Windows.Forms;
+using MaterialSkin.Controls;
 
 namespace UpdateManagerApp
 {
@@ -15,11 +15,9 @@ namespace UpdateManagerApp
             ExecuteUpdate("PowerShellScripts/UpdateAllApplications.ps1");
         }
 
-        public static void UpdateSpecificApplication()
+        public static void UpdateSpecificApplication(string appName)
         {
-            List<ApplicationInfo> allApplications = GetInstalledApplications();
-            List<ApplicationInfo> updatableApplications = GetUpgradableApplications();
-            ShowApplicationSelectionDialog(allApplications, updatableApplications);
+            ExecuteUpdate("PowerShellScripts/UpdateSpecificApplication.ps1", appName);
         }
 
         public static void UpdateWindowsServicesAndDrivers()
@@ -32,12 +30,14 @@ namespace UpdateManagerApp
             ExecuteUpdate("PowerShellScripts/UpdateDeviceDrivers.ps1");
         }
 
-        private static void ExecuteUpdate(string scriptPath)
+        private static void ExecuteUpdate(string scriptPath, string arguments = "")
         {
             ProgressForm progressForm = new ProgressForm();
-            BackgroundWorker worker = new BackgroundWorker();
-            worker.WorkerReportsProgress = true;
-            worker.DoWork += (s, args) => ExecutePowerShellScript(scriptPath, worker);
+            BackgroundWorker worker = new BackgroundWorker
+            {
+                WorkerReportsProgress = true
+            };
+            worker.DoWork += (s, args) => ExecutePowerShellScript(scriptPath, worker, arguments);
             worker.ProgressChanged += (s, args) =>
             {
                 progressForm.ProgressBar.Value = args.ProgressPercentage;
@@ -50,7 +50,7 @@ namespace UpdateManagerApp
 
         private static void ExecutePowerShellScript(string scriptPath, BackgroundWorker worker, string arguments = "")
         {
-            ProcessStartInfo startInfo = new ProcessStartInfo()
+            ProcessStartInfo startInfo = new ProcessStartInfo
             {
                 FileName = "powershell.exe",
                 Arguments = $"-NoProfile -ExecutionPolicy Bypass -File \"{scriptPath}\" {arguments}",
@@ -60,7 +60,7 @@ namespace UpdateManagerApp
                 CreateNoWindow = true
             };
 
-            using (Process process = new Process() { StartInfo = startInfo })
+            using (Process process = new Process { StartInfo = startInfo })
             {
                 process.Start();
                 while (!process.StandardOutput.EndOfStream)
@@ -81,10 +81,10 @@ namespace UpdateManagerApp
             }
         }
 
-        private static List<ApplicationInfo> GetInstalledApplications()
+        public static List<ApplicationInfo> GetInstalledApplications()
         {
             List<ApplicationInfo> applications = new List<ApplicationInfo>();
-            ProcessStartInfo startInfo = new ProcessStartInfo()
+            ProcessStartInfo startInfo = new ProcessStartInfo
             {
                 FileName = "powershell.exe",
                 Arguments = "-NoProfile -ExecutionPolicy Bypass -Command \"Get-StartApps | Select-Object Name\"",
@@ -94,7 +94,7 @@ namespace UpdateManagerApp
                 CreateNoWindow = true
             };
 
-            using (Process process = new Process() { StartInfo = startInfo })
+            using (Process process = new Process { StartInfo = startInfo })
             {
                 process.Start();
                 string output = process.StandardOutput.ReadToEnd();
@@ -120,10 +120,10 @@ namespace UpdateManagerApp
             return applications;
         }
 
-        private static List<ApplicationInfo> GetUpgradableApplications()
+        public static List<ApplicationInfo> GetUpgradableApplications()
         {
             List<ApplicationInfo> applications = new List<ApplicationInfo>();
-            ProcessStartInfo startInfo = new ProcessStartInfo()
+            ProcessStartInfo startInfo = new ProcessStartInfo
             {
                 FileName = "powershell.exe",
                 Arguments = "-NoProfile -ExecutionPolicy Bypass -Command \"winget upgrade\"",
@@ -133,7 +133,7 @@ namespace UpdateManagerApp
                 CreateNoWindow = true
             };
 
-            using (Process process = new Process() { StartInfo = startInfo })
+            using (Process process = new Process { StartInfo = startInfo })
             {
                 process.Start();
                 string output = process.StandardOutput.ReadToEnd();
@@ -169,78 +169,6 @@ namespace UpdateManagerApp
                 }
             }
             return applications;
-        }
-
-        private static void ShowApplicationSelectionDialog(List<ApplicationInfo> allApplications, List<ApplicationInfo> updatableApplications)
-        {
-            using (var dialog = new Form())
-            {
-                dialog.Text = "Select Application to Update";
-                dialog.Size = new System.Drawing.Size(800, 600);
-
-                var allAppsGridView = new DataGridView
-                {
-                    DataSource = allApplications,
-                    Dock = DockStyle.Top,
-                    Height = 250,
-                    AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill
-                };
-
-                var updatesGridView = new DataGridView
-                {
-                    DataSource = updatableApplications,
-                    Dock = DockStyle.Bottom,
-                    Height = 250,
-                    AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill
-                };
-
-                var updateButton = new MaterialButton
-                {
-                    Text = "Update Selected Application",
-                    Dock = DockStyle.Fill
-                };
-
-                updateButton.Click += (s, e) =>
-                {
-                    if (updatesGridView.SelectedRows.Count > 0)
-                    {
-                        var selectedApp = updatesGridView.SelectedRows[0].DataBoundItem as ApplicationInfo;
-                        if (selectedApp != null)
-                        {
-                            ProgressForm progressForm = new ProgressForm();
-                            BackgroundWorker worker = new BackgroundWorker();
-                            worker.WorkerReportsProgress = true;
-                            worker.DoWork += (sender, args) => ExecutePowerShellScript("PowerShellScripts/UpdateSpecificApplication.ps1", worker, $"\"{selectedApp.Name}\"");
-                            worker.ProgressChanged += (sender, args) =>
-                            {
-                                progressForm.ProgressBar.Value = args.ProgressPercentage;
-                                progressForm.StatusLabel.Text = args.UserState?.ToString();
-                            };
-                            worker.RunWorkerCompleted += (sender, args) => progressForm.Close();
-                            worker.RunWorkerAsync();
-
-                            progressForm.ShowDialog();
-                        }
-                    }
-                };
-
-                var layout = new TableLayoutPanel
-                {
-                    Dock = DockStyle.Fill,
-                    RowCount = 3,
-                    ColumnCount = 1
-                };
-
-                layout.RowStyles.Add(new RowStyle(SizeType.Percent, 40F));
-                layout.RowStyles.Add(new RowStyle(SizeType.Percent, 40F));
-                layout.RowStyles.Add(new RowStyle(SizeType.Percent, 20F));
-                layout.Controls.Add(allAppsGridView, 0, 0);
-                layout.Controls.Add(updatesGridView, 0, 1);
-                layout.Controls.Add(updateButton, 0, 2);
-
-                dialog.Controls.Add(layout);
-                dialog.ShowDialog();
-            }
         }
     }
 }

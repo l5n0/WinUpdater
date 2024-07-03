@@ -1,0 +1,10 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\UpdateManager",
+    "\\UpdateManager\\UpdateManagerApp",
+    "\\UpdateManager\\UpdateManagerApp\\Components"
+  ],
+  "SelectedNode": "\\UpdateManager\\UpdateManagerApp\\Components\\InitializeComponent.cs",
+  "PreviewInSolutionExplorer": false
+}
