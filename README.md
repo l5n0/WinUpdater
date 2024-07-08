@@ -5,6 +5,13 @@ Please don't be so hard on me this is my first software.
 
 I built this application so that people can update the applications they have to the latest version. At the moment it works, but the GUI doesn't look good. This will be the next step to make the GUI usable.
 
+# Planned
+- Fixing the buttons
+   - Some buttons have the problem of not working or working very slowly.
+- Fix the UI
+   - Make a more interactive UI with some data
+- Maybe something like "TreeSize" not 100%.
+
 # Installation Guide for UpdateManagerApp
 
 Follow these steps to download, build, and install the UpdateManagerApp on your Windows machine.
