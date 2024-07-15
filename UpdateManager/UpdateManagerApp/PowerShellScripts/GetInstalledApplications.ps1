@@ -22,10 +22,13 @@ function Get-InstalledApplications {
         }
     }
 
-    # Filter out entries without a name
-    $apps = $apps | Where-Object { $_.Name -ne $null -and $_.Name -ne "" }
+    # Filter out entries without a name or version
+    $apps = $apps | Where-Object { $_.Name -ne $null -and $_.Name -ne "" -and $_.Version -ne $null -and $_.Version -ne "" }
 
-    return $apps
+    # Group by Name and select the latest version for each group
+    $uniqueApps = $apps | Sort-Object Name, Version -Descending | Group-Object Name | ForEach-Object { $_.Group | Sort-Object Version -Descending | Select-Object -First 1 }
+
+    return $uniqueApps
 }
 
 # Execute the function and display the installed applications

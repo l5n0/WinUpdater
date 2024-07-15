@@ -2,43 +2,42 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 
 namespace UpdateManagerApp
 {
     public static class UpdateActions
     {
-        private static string scriptBasePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "PowerShellScripts");
-
         public static void UpdateAllApplications()
         {
-            ExecuteUpdate(Path.Combine(scriptBasePath, "UpdateAllApplications.ps1"));
+            ExecuteUpdate("PowerShellScripts/UpdateAllApplications.ps1");
         }
 
         public static void UpdateSpecificApplication(string appName)
         {
-            ExecuteUpdate(Path.Combine(scriptBasePath, "UpdateSpecificApplication.ps1"), appName);
+            ExecuteUpdate("PowerShellScripts/UpdateSpecificApplication.ps1", appName);
         }
 
         public static void UpdateWindowsServicesAndDrivers()
         {
-            ExecuteUpdate(Path.Combine(scriptBasePath, "UpdateWindowsServicesAndDrivers.ps1"));
+            ExecuteUpdate("PowerShellScripts/UpdateWindowsServicesAndDrivers.ps1");
         }
 
         public static void UpdateAllDrivers()
         {
-            ExecuteUpdate(Path.Combine(scriptBasePath, "UpdateAllDrivers.ps1"));
+            ExecuteUpdate("PowerShellScripts/UpdateAllDrivers.ps1");
         }
 
         public static void UpdateSpecificDriver(string driverName)
         {
-            ExecuteUpdate(Path.Combine(scriptBasePath, "UpdateSpecificDriver.ps1"), driverName);
+            ExecuteUpdate("PowerShellScripts/UpdateSpecificDriver.ps1", driverName);
         }
 
         public static List<ApplicationInfo> GetInstalledApplications()
         {
             var applications = new List<ApplicationInfo>();
-            string scriptPath = Path.Combine(scriptBasePath, "GetInstalledApplications.ps1");
-
+            string scriptPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "PowerShellScripts", "GetInstalledApplications.ps1");
+            
             ProcessStartInfo startInfo = new ProcessStartInfo()
             {
                 FileName = "powershell.exe",
@@ -59,8 +58,8 @@ namespace UpdateManagerApp
 
                     foreach (var line in lines)
                     {
-                        var columns = line.Split(new[] { ' ' }, 5);
-                        if (columns.Length >= 2 && columns[0] != "Name" && columns[0] != "----")
+                        var columns = line.Split(new[] { ' ' }, 5, StringSplitOptions.RemoveEmptyEntries);
+                        if (columns.Length >= 2)
                         {
                             applications.Add(new ApplicationInfo
                             {
@@ -80,14 +79,20 @@ namespace UpdateManagerApp
                 }
             }
 
-            return applications;
+            // Ensure unique applications by name, keeping the latest version
+            var uniqueApplications = applications
+                .GroupBy(app => app.Name)
+                .Select(group => group.OrderByDescending(app => app.CurrentVersion).First())
+                .ToList();
+
+            return uniqueApplications;
         }
 
         public static List<DriverInfo> GetInstalledDrivers()
         {
             var drivers = new List<DriverInfo>();
-            string scriptPath = Path.Combine(scriptBasePath, "GetInstalledDrivers.ps1");
-
+            string scriptPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "PowerShellScripts", "GetInstalledDrivers.ps1");
+            
             ProcessStartInfo startInfo = new ProcessStartInfo()
             {
                 FileName = "powershell.exe",
@@ -108,8 +113,8 @@ namespace UpdateManagerApp
 
                     foreach (var line in lines)
                     {
-                        var columns = line.Split(new[] { ' ' }, 5);
-                        if (columns.Length >= 2 && columns[0] != "Name" && columns[0] != "----")
+                        var columns = line.Split(new[] { ' ' }, 5, StringSplitOptions.RemoveEmptyEntries);
+                        if (columns.Length >= 2)
                         {
                             drivers.Add(new DriverInfo
                             {
@@ -129,7 +134,13 @@ namespace UpdateManagerApp
                 }
             }
 
-            return drivers;
+            // Ensure unique drivers by name, keeping the latest version
+            var uniqueDrivers = drivers
+                .GroupBy(driver => driver.Name)
+                .Select(group => group.OrderByDescending(driver => driver.CurrentVersion).First())
+                .ToList();
+
+            return uniqueDrivers;
         }
 
         private static void ExecuteUpdate(string scriptPath, string arguments = "")

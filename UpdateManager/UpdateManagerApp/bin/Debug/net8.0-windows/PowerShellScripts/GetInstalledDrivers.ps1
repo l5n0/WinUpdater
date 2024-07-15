@@ -2,28 +2,13 @@
 # This script retrieves installed drivers on a Windows machine
 
 function Get-InstalledDrivers {
-    $drivers = @()
+    $drivers = Get-WmiObject Win32_PnPSignedDriver | Select-Object DeviceName, DriverVersion
 
-    $driverQuery = Get-WmiObject Win32_PnPSignedDriver
+    # Filter out entries without a name or version
+    $drivers = $drivers | Where-Object { $_.DeviceName -ne $null -and $_.DeviceName -ne "" -and $_.DriverVersion -ne $null -and $_.DriverVersion -ne "" }
 
-    foreach ($driver in $driverQuery) {
-        if ($driver.DeviceName -and $driver.DriverVersion -and $driver.Manufacturer) {
-            $drivers += [PSCustomObject]@{
-                Name          = $driver.DeviceName
-                DriverVersion = $driver.DriverVersion
-                Manufacturer  = $driver.Manufacturer
-                InstallDate   = $driver.InstallDate
-            }
-        }
-    }
-
-    # Filter out drivers with empty or null values
-    $filteredDrivers = $drivers | Where-Object {
-        $_.Name -ne "" -and $_.DriverVersion -ne "" -and $_.Manufacturer -ne ""
-    }
-
-    # Group by Name and select the first entry for each group
-    $uniqueDrivers = $filteredDrivers | Group-Object Name | ForEach-Object { $_.Group[0] }
+    # Group by DeviceName and select the latest version for each group
+    $uniqueDrivers = $drivers | Sort-Object DeviceName, DriverVersion -Descending | Group-Object DeviceName | ForEach-Object { $_.Group | Sort-Object DriverVersion -Descending | Select-Object -First 1 }
 
     return $uniqueDrivers
 }

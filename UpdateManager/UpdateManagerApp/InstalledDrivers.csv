@@ -1,64 +1,64 @@
-"Name","DriverVersion","Manufacturer","InstallDate"
-"Audio Endpoint","10.0.20348.1","Microsoft",
-"Generic Non-PnP Monitor","10.0.20348.2520","(Standard monitor types)",
-"Microsoft Remote Display Adapter","10.0.20348.2520","Microsoft",
-"Generic software device","10.0.20348.1","Microsoft",
-"Local Print Queue","10.0.20348.1","Microsoft",
-"WAN Miniport (Network Monitor)","10.0.20348.1","Microsoft",
-"WAN Miniport (IPv6)","10.0.20348.1","Microsoft",
-"WAN Miniport (IP)","10.0.20348.1","Microsoft",
-"WAN Miniport (GRE)","10.0.20348.1","Microsoft",
-"WAN Miniport (PPPOE)","10.0.20348.1","Microsoft",
-"WAN Miniport (PPTP)","10.0.20348.1","Microsoft",
-"WAN Miniport (L2TP)","10.0.20348.1","Microsoft",
-"WAN Miniport (IKEv2)","10.0.20348.1","Microsoft",
-"WAN Miniport (SSTP)","10.0.20348.1","Microsoft",
-"Remote Desktop Device Redirector Bus","10.0.20348.1","Microsoft",
-"Plug and Play Software Device Enumerator","10.0.20348.1","(Standard system devices)",
-"Microsoft System Management BIOS Driver","10.0.20348.1","(Standard system devices)",
-"NDIS Virtual Network Adapter Enumerator","10.0.20348.1","Microsoft",
-"Microsoft Basic Render Driver","10.0.20348.1006","Microsoft",
-"ACPI Fixed Feature Button","10.0.20348.1","(Standard system devices)",
-"Microsoft Hyper-V Generation Counter","10.0.20348.1","Microsoft",
-"AMD K8 Processor","10.0.20348.2520","Advanced Micro Devices",
-"ACPI Processor Container Device","10.0.20348.1","(Standard system devices)",
-"System board","10.0.20348.1","(Standard system devices)",
-"Extended IO Bus","10.0.20348.1","(Standard system devices)",
-"SM Bus Controller","10.0.20348.1","Intel",
-"Standard SATA AHCI Controller","10.0.20348.887","Standard SATA AHCI Controller",
-"System CMOS/real time clock","10.0.20348.1","(Standard system devices)",
-"PS/2 Compatible Mouse","10.0.20348.1","Microsoft",
-"Standard PS/2 Keyboard","10.0.20348.2520","(Standard keyboards)",
-"LPC Controller","10.0.20348.1","Intel",
-"PCI-to-PCI Bridge","10.0.20348.2520","(Standard system devices)",
-"Intel(R) PRO/1000 MT Network Connection","8.4.13.0","Intel",
-"Disk drive","10.0.20348.2520","(Standard disk drives)",
-"Red Hat VirtIO SCSI controller","100.93.104.24000","Red Hat, Inc.",
-"HID-compliant mouse","10.0.20348.1","Microsoft",
-"USB Input Device","10.0.20348.1249","(Standard system devices)",
-"USB Root Hub","10.0.20348.2520","(Standard USB Host Controller)",
-"Intel(R) ICH9 Family USB2 Enhanced Host Controller - 293A","10.0.20348.2520","Intel",
-"Intel(R) ICH9 Family USB Universal Host Controller - 2936","10.0.20348.2520","Intel",
-"Intel(R) ICH9 Family USB Universal Host Controller - 2935","10.0.20348.2520","Intel",
-"Intel(R) ICH9 Family USB Universal Host Controller - 2934","10.0.20348.2520","Intel",
-"High Definition Audio Controller","10.0.20348.2520","Microsoft",
-"Intel(R) ICH9 Family USB2 Enhanced Host Controller - 293C","10.0.20348.2520","Intel",
-"Intel(R) ICH9 Family USB Universal Host Controller - 2939","10.0.20348.2520","Intel",
-"Intel(R) ICH9 Family USB Universal Host Controller - 2938","10.0.20348.2520","Intel",
-"Intel(R) ICH9 Family USB Universal Host Controller - 2937","10.0.20348.2520","Intel",
-"Microsoft Basic Display Adapter","10.0.20348.1","(Standard display types)",
-"CPU to IO Controller","10.0.20348.1","Intel",
-"PCI Express Root Complex","10.0.20348.2520","(Standard system devices)",
-"Microsoft ACPI-Compliant System","10.0.20348.2110","Microsoft",
-"ACPI x64-based PC","10.0.20348.1","(Standard computers)",
-"Remote Desktop Mouse Device","10.0.20348.1","(Standard system devices)",
-"Remote Desktop Keyboard Device","10.0.20348.1","(Standard system devices)",
-"UMBus Enumerator","10.0.20348.1","Microsoft",
-"UMBus Root Bus Enumerator","10.0.20348.1","Microsoft",
-"Microsoft Kernel Debug Network Adapter","10.0.20348.1","Microsoft",
-"Microsoft Storage Spaces Controller","10.0.20348.2520","Microsoft",
-"Microsoft Virtual Drive Enumerator","10.0.20348.1970","Microsoft",
-"Composite Bus Enumerator","10.0.20348.1","Microsoft",
-"Microsoft Basic Display Driver","10.0.20348.1","(Standard display types)",
-"Volume","10.0.20348.1","Microsoft",
-"Volume Manager","10.0.20348.803","Microsoft",
+"DeviceName","DriverVersion"
+"WAN Miniport (SSTP)","10.0.20348.1"
+"WAN Miniport (PPTP)","10.0.20348.1"
+"WAN Miniport (PPPOE)","10.0.20348.1"
+"WAN Miniport (Network Monitor)","10.0.20348.1"
+"WAN Miniport (L2TP)","10.0.20348.1"
+"WAN Miniport (IPv6)","10.0.20348.1"
+"WAN Miniport (IP)","10.0.20348.1"
+"WAN Miniport (IKEv2)","10.0.20348.1"
+"WAN Miniport (GRE)","10.0.20348.1"
+"Volume Manager","10.0.20348.803"
+"Volume","10.0.20348.1"
+"USB Root Hub","10.0.20348.2520"
+"USB Input Device","10.0.20348.1249"
+"UMBus Root Bus Enumerator","10.0.20348.1"
+"UMBus Enumerator","10.0.20348.1"
+"System CMOS/real time clock","10.0.20348.1"
+"System board","10.0.20348.1"
+"Standard SATA AHCI Controller","10.0.20348.887"
+"Standard PS/2 Keyboard","10.0.20348.2520"
+"SM Bus Controller","10.0.20348.1"
+"Remote Desktop Mouse Device","10.0.20348.1"
+"Remote Desktop Keyboard Device","10.0.20348.1"
+"Remote Desktop Device Redirector Bus","10.0.20348.1"
+"Red Hat VirtIO SCSI controller","100.93.104.24000"
+"PS/2 Compatible Mouse","10.0.20348.1"
+"Plug and Play Software Device Enumerator","10.0.20348.1"
+"PCI-to-PCI Bridge","10.0.20348.2520"
+"PCI Express Root Complex","10.0.20348.2520"
+"NDIS Virtual Network Adapter Enumerator","10.0.20348.1"
+"Microsoft Virtual Drive Enumerator","10.0.20348.1970"
+"Microsoft System Management BIOS Driver","10.0.20348.1"
+"Microsoft Storage Spaces Controller","10.0.20348.2520"
+"Microsoft Remote Display Adapter","10.0.20348.2520"
+"Microsoft Kernel Debug Network Adapter","10.0.20348.1"
+"Microsoft Hyper-V Generation Counter","10.0.20348.1"
+"Microsoft Basic Render Driver","10.0.20348.1006"
+"Microsoft Basic Display Driver","10.0.20348.1"
+"Microsoft Basic Display Adapter","10.0.20348.1"
+"Microsoft ACPI-Compliant System","10.0.20348.2110"
+"LPC Controller","10.0.20348.1"
+"Local Print Queue","10.0.20348.1"
+"Intel(R) PRO/1000 MT Network Connection","8.4.13.0"
+"Intel(R) ICH9 Family USB2 Enhanced Host Controller - 293C","10.0.20348.2520"
+"Intel(R) ICH9 Family USB2 Enhanced Host Controller - 293A","10.0.20348.2520"
+"Intel(R) ICH9 Family USB Universal Host Controller - 2939","10.0.20348.2520"
+"Intel(R) ICH9 Family USB Universal Host Controller - 2938","10.0.20348.2520"
+"Intel(R) ICH9 Family USB Universal Host Controller - 2937","10.0.20348.2520"
+"Intel(R) ICH9 Family USB Universal Host Controller - 2936","10.0.20348.2520"
+"Intel(R) ICH9 Family USB Universal Host Controller - 2935","10.0.20348.2520"
+"Intel(R) ICH9 Family USB Universal Host Controller - 2934","10.0.20348.2520"
+"High Definition Audio Controller","10.0.20348.2520"
+"HID-compliant mouse","10.0.20348.1"
+"Generic software device","10.0.20348.1"
+"Generic Non-PnP Monitor","10.0.20348.2520"
+"Extended IO Bus","10.0.20348.1"
+"Disk drive","10.0.20348.2520"
+"CPU to IO Controller","10.0.20348.1"
+"Composite Bus Enumerator","10.0.20348.1"
+"Audio Endpoint","10.0.20348.1"
+"AMD K8 Processor","10.0.20348.2520"
+"ACPI x64-based PC","10.0.20348.1"
+"ACPI Processor Container Device","10.0.20348.1"
+"ACPI Fixed Feature Button","10.0.20348.1"
