@@ -1,56 +1,140 @@
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Diagnostics;
-using System.Linq;
-using System.Windows.Forms;
-using MaterialSkin.Controls;
+using System.IO;
 
 namespace UpdateManagerApp
 {
     public static class UpdateActions
     {
+        private static string scriptBasePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "PowerShellScripts");
+
         public static void UpdateAllApplications()
         {
-            ExecuteUpdate("PowerShellScripts/UpdateAllApplications.ps1");
+            ExecuteUpdate(Path.Combine(scriptBasePath, "UpdateAllApplications.ps1"));
         }
 
         public static void UpdateSpecificApplication(string appName)
         {
-            ExecuteUpdate("PowerShellScripts/UpdateSpecificApplication.ps1", appName);
+            ExecuteUpdate(Path.Combine(scriptBasePath, "UpdateSpecificApplication.ps1"), appName);
         }
 
         public static void UpdateWindowsServicesAndDrivers()
         {
-            ExecuteUpdate("PowerShellScripts/UpdateWindowsServicesAndDrivers.ps1");
+            ExecuteUpdate(Path.Combine(scriptBasePath, "UpdateWindowsServicesAndDrivers.ps1"));
         }
 
-        public static void UpdateDeviceDrivers()
+        public static void UpdateAllDrivers()
         {
-            ExecuteUpdate("PowerShellScripts/UpdateDeviceDrivers.ps1");
+            ExecuteUpdate(Path.Combine(scriptBasePath, "UpdateAllDrivers.ps1"));
+        }
+
+        public static void UpdateSpecificDriver(string driverName)
+        {
+            ExecuteUpdate(Path.Combine(scriptBasePath, "UpdateSpecificDriver.ps1"), driverName);
+        }
+
+        public static List<ApplicationInfo> GetInstalledApplications()
+        {
+            var applications = new List<ApplicationInfo>();
+            string scriptPath = Path.Combine(scriptBasePath, "GetInstalledApplications.ps1");
+
+            ProcessStartInfo startInfo = new ProcessStartInfo()
+            {
+                FileName = "powershell.exe",
+                Arguments = $"-NoProfile -ExecutionPolicy Bypass -File \"{scriptPath}\"",
+                UseShellExecute = false,
+                RedirectStandardOutput = true,
+                RedirectStandardError = true,
+                CreateNoWindow = true
+            };
+
+            using (Process process = new Process() { StartInfo = startInfo })
+            {
+                process.Start();
+                using (StreamReader reader = process.StandardOutput)
+                {
+                    string result = reader.ReadToEnd();
+                    string[] lines = result.Split(new[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
+
+                    foreach (var line in lines)
+                    {
+                        var columns = line.Split(new[] { ' ' }, 5);
+                        if (columns.Length >= 2)
+                        {
+                            applications.Add(new ApplicationInfo
+                            {
+                                Name = columns[0],
+                                CurrentVersion = columns[1]
+                            });
+                        }
+                    }
+                }
+
+                string error = process.StandardError.ReadToEnd();
+                process.WaitForExit();
+
+                if (!string.IsNullOrEmpty(error))
+                {
+                    throw new Exception(error);
+                }
+            }
+
+            return applications;
+        }
+
+        public static List<DriverInfo> GetInstalledDrivers()
+        {
+            var drivers = new List<DriverInfo>();
+            string scriptPath = Path.Combine(scriptBasePath, "GetInstalledDrivers.ps1");
+
+            ProcessStartInfo startInfo = new ProcessStartInfo()
+            {
+                FileName = "powershell.exe",
+                Arguments = $"-NoProfile -ExecutionPolicy Bypass -File \"{scriptPath}\"",
+                UseShellExecute = false,
+                RedirectStandardOutput = true,
+                RedirectStandardError = true,
+                CreateNoWindow = true
+            };
+
+            using (Process process = new Process() { StartInfo = startInfo })
+            {
+                process.Start();
+                using (StreamReader reader = process.StandardOutput)
+                {
+                    string result = reader.ReadToEnd();
+                    string[] lines = result.Split(new[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
+
+                    foreach (var line in lines)
+                    {
+                        var columns = line.Split(new[] { ' ' }, 5);
+                        if (columns.Length >= 2)
+                        {
+                            drivers.Add(new DriverInfo
+                            {
+                                Name = columns[0],
+                                CurrentVersion = columns[1]
+                            });
+                        }
+                    }
+                }
+
+                string error = process.StandardError.ReadToEnd();
+                process.WaitForExit();
+
+                if (!string.IsNullOrEmpty(error))
+                {
+                    throw new Exception(error);
+                }
+            }
+
+            return drivers;
         }
 
         private static void ExecuteUpdate(string scriptPath, string arguments = "")
         {
-            ProgressForm progressForm = new ProgressForm();
-            BackgroundWorker worker = new BackgroundWorker
-            {
-                WorkerReportsProgress = true
-            };
-            worker.DoWork += (s, args) => ExecutePowerShellScript(scriptPath, worker, arguments);
-            worker.ProgressChanged += (s, args) =>
-            {
-                progressForm.ProgressBar.Value = args.ProgressPercentage;
-                progressForm.StatusLabel.Text = args.UserState?.ToString();
-            };
-            worker.RunWorkerCompleted += (s, args) => progressForm.Close();
-            worker.RunWorkerAsync();
-            progressForm.ShowDialog();
-        }
-
-        private static void ExecutePowerShellScript(string scriptPath, BackgroundWorker worker, string arguments = "")
-        {
-            ProcessStartInfo startInfo = new ProcessStartInfo
+            ProcessStartInfo startInfo = new ProcessStartInfo()
             {
                 FileName = "powershell.exe",
                 Arguments = $"-NoProfile -ExecutionPolicy Bypass -File \"{scriptPath}\" {arguments}",
@@ -60,7 +144,7 @@ namespace UpdateManagerApp
                 CreateNoWindow = true
             };
 
-            using (Process process = new Process { StartInfo = startInfo })
+            using (Process process = new Process() { StartInfo = startInfo })
             {
                 process.Start();
                 while (!process.StandardOutput.EndOfStream)
@@ -68,7 +152,7 @@ namespace UpdateManagerApp
                     string line = process.StandardOutput.ReadLine();
                     if (line != null)
                     {
-                        worker.ReportProgress(0, line); // This can be improved by parsing progress percentage if available
+                        Console.WriteLine(line); // Replace this with logging if necessary
                     }
                 }
                 string error = process.StandardError.ReadToEnd();
@@ -76,99 +160,15 @@ namespace UpdateManagerApp
 
                 if (!string.IsNullOrEmpty(error))
                 {
-                    MessageBox.Show(error, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    throw new Exception(error);
                 }
             }
         }
+    }
 
-        public static List<ApplicationInfo> GetInstalledApplications()
-        {
-            List<ApplicationInfo> applications = new List<ApplicationInfo>();
-            ProcessStartInfo startInfo = new ProcessStartInfo
-            {
-                FileName = "powershell.exe",
-                Arguments = "-NoProfile -ExecutionPolicy Bypass -Command \"Get-StartApps | Select-Object Name\"",
-                UseShellExecute = false,
-                RedirectStandardOutput = true,
-                RedirectStandardError = true,
-                CreateNoWindow = true
-            };
-
-            using (Process process = new Process { StartInfo = startInfo })
-            {
-                process.Start();
-                string output = process.StandardOutput.ReadToEnd();
-                process.WaitForExit();
-
-                if (process.ExitCode == 0)
-                {
-                    string[] lines = output.Split(new[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
-                    foreach (string line in lines.Skip(3)) // Skip header
-                    {
-                        if (!string.IsNullOrWhiteSpace(line))
-                        {
-                            applications.Add(new ApplicationInfo
-                            {
-                                Name = line.Trim(),
-                                CurrentVersion = "Unknown",
-                                AvailableVersion = ""
-                            });
-                        }
-                    }
-                }
-            }
-            return applications;
-        }
-
-        public static List<ApplicationInfo> GetUpgradableApplications()
-        {
-            List<ApplicationInfo> applications = new List<ApplicationInfo>();
-            ProcessStartInfo startInfo = new ProcessStartInfo
-            {
-                FileName = "powershell.exe",
-                Arguments = "-NoProfile -ExecutionPolicy Bypass -Command \"winget upgrade\"",
-                UseShellExecute = false,
-                RedirectStandardOutput = true,
-                RedirectStandardError = true,
-                CreateNoWindow = true
-            };
-
-            using (Process process = new Process { StartInfo = startInfo })
-            {
-                process.Start();
-                string output = process.StandardOutput.ReadToEnd();
-                process.WaitForExit();
-
-                if (process.ExitCode == 0)
-                {
-                    string[] lines = output.Split(new[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
-                    bool foundHeader = false;
-                    foreach (string line in lines)
-                    {
-                        if (foundHeader)
-                        {
-                            var columns = line.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries).ToList();
-                            if (columns.Count >= 5)
-                            {
-                                string name = columns[0];
-                                string currentVersion = columns[2];
-                                string availableVersion = columns[3];
-                                applications.Add(new ApplicationInfo
-                                {
-                                    Name = name,
-                                    CurrentVersion = currentVersion,
-                                    AvailableVersion = availableVersion
-                                });
-                            }
-                        }
-                        else if (line.StartsWith("Name", StringComparison.OrdinalIgnoreCase))
-                        {
-                            foundHeader = true;
-                        }
-                    }
-                }
-            }
-            return applications;
-        }
+    public class DriverInfo
+    {
+        public string Name { get; set; } = string.Empty;
+        public string CurrentVersion { get; set; } = string.Empty;
     }
 }

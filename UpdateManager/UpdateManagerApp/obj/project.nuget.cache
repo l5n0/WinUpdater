@@ -1,22 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "L+hZKvdQ0pY=",
+  "dgSpecHash": "avHqTWTmlmI=",
   "success": true,
   "projectFilePath": "C:\\Users\\Administrator\\Documents\\GitHub\\WinUpdater\\UpdateManager\\UpdateManagerApp\\UpdateManagerApp.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\Administrator\\.nuget\\packages\\materialskin.2\\2.2.0\\materialskin.2.2.2.0.nupkg.sha512",
     "C:\\Users\\Administrator\\.nuget\\packages\\microsoft.visualbasic\\10.3.0\\microsoft.visualbasic.10.3.0.nupkg.sha512"
   ],
-  "logs": [
-    {
-      "code": "NU1701",
-      "level": "Warning",
-      "warningLevel": 1,
-      "message": "Package 'MaterialSkin.2 2.2.0' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' instead of the project target framework 'net8.0-windows7.0'. This package may not be fully compatible with your project.",
-      "libraryId": "MaterialSkin.2",
-      "targetGraphs": [
-        "net8.0-windows7.0"
-      ]
-    }
-  ]
+  "logs": []
 }

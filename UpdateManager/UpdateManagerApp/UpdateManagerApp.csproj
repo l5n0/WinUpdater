@@ -14,12 +14,16 @@
     <Compile Include="Components\ProgressForm.cs" />
     <Compile Include="Components\ApplicationInfo.cs" />
     <Compile Include="Components\DarkModeColors.cs" />
-    <Compile Include="Components\MaterialSkinManagerSetup.cs" />
+    <Compile Include="Components\DiskUsageControl.cs" />
+    <Compile Include="Components\UpdateApplicationsControl.cs" />
+    <Compile Include="Components\UpdateDriversControl.cs" />
     <Compile Include="MainForm.Designer.cs" />
     <Compile Include="Components\UpdateActions.cs" />
     <Compile Include="Program.cs" />
-    <PackageReference Include="MaterialSkin.2" Version="2.2.0" />
     <PackageReference Include="Microsoft.VisualBasic" Version="10.3.0" />
+    <None Update="PowerShellScripts\*.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>

@@ -8,19 +8,10 @@
     ".NETCoreApp,Version=v8.0": {
       "UpdateManagerApp/1.0.0": {
         "dependencies": {
-          "MaterialSkin.2": "2.2.0",
           "Microsoft.VisualBasic": "10.3.0"
         },
         "runtime": {
           "UpdateManagerApp.dll": {}
-        }
-      },
-      "MaterialSkin.2/2.2.0": {
-        "runtime": {
-          "lib/net461/MaterialSkin.dll": {
-            "assemblyVersion": "2.2.0.0",
-            "fileVersion": "2.2.0.0"
-          }
         }
       },
       "Microsoft.VisualBasic/10.3.0": {}
@@ -31,13 +22,6 @@
       "type": "project",
       "serviceable": false,
       "sha512": ""
-    },
-    "MaterialSkin.2/2.2.0": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-LqrZYeIHiQwg1xuw3CTUBOSKm0b1WZmJXJsD6V3dSQwa1mohqEbnbZ1aFK/P+zNlf3uA9dBdbLH/DeeOWDgfrA==",
-      "path": "materialskin.2/2.2.0",
-      "hashPath": "materialskin.2.2.2.0.nupkg.sha512"
     },
     "Microsoft.VisualBasic/10.3.0": {
       "type": "package",

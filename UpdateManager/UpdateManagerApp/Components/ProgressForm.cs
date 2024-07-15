@@ -1,23 +1,21 @@
-using MaterialSkin.Controls;
 using System.Windows.Forms;
 
 namespace UpdateManagerApp
 {
-    public partial class ProgressForm : MaterialForm
+    public partial class ProgressForm : Form
     {
         public ProgressForm()
         {
             InitializeComponent();
-            MaterialSkinManagerSetup.InitializeMaterialSkin(this);
         }
 
-        public MaterialProgressBar ProgressBar => progressBar;
-        public MaterialLabel StatusLabel => statusLabel;
+        public ProgressBar ProgressBar => progressBar;
+        public Label StatusLabel => statusLabel;
 
         private void InitializeComponent()
         {
-            this.progressBar = new MaterialProgressBar();
-            this.statusLabel = new MaterialLabel();
+            this.progressBar = new ProgressBar();
+            this.statusLabel = new Label();
 
             this.SuspendLayout();
 
@@ -48,7 +46,7 @@ namespace UpdateManagerApp
             this.ResumeLayout(false);
         }
 
-        private MaterialProgressBar progressBar;
-        private MaterialLabel statusLabel;
+        private ProgressBar progressBar;
+        private Label statusLabel;
     }
 }
