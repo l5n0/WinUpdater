@@ -4,7 +4,7 @@
 "Git","2.45.2","The Git Development Community","20240629","""C:\Program Files\Git\unins000.exe"""
 "Microsoft Azure Compute Emulator - v2.9.7","2.9.8999.43","Microsoft Corporation","02/07/2024","msiexec /x{04ca054c-2f40-44b0-8610-8d51ec9444fe}"
 "Microsoft Visual Studio 2010 Tools for Office Runtime (x64)","10.0.60917","Microsoft Corporation",,"""c:\Program Files\Common Files\Microsoft Shared\VSTO\10.0\Microsoft Visual Studio 2010 Tools for Office Runtime (x64)\install.exe"""
-"Mozilla Firefox (x64 en-GB)","127.0.2","Mozilla",,"""C:\Program Files\Mozilla Firefox\uninstall\helper.exe"""
+"Mozilla Firefox (x64 en-GB)","128.0","Mozilla",,"""C:\Program Files\Mozilla Firefox\uninstall\helper.exe"""
 "Mozilla Maintenance Service","127.0.1","Mozilla",,"""C:\Program Files (x86)\Mozilla Maintenance Service\uninstall.exe"""
 "Notepad++ (64-bit x64)","8.6.8","Notepad++ Team",,"""C:\Program Files\Notepad++\uninstall.exe"""
 "RawTherapee version 5.10","5.10","rawtherapee.com","20240709","""C:\Program Files\RawTherapee\5.10\unins000.exe"""
@@ -206,7 +206,7 @@
 "Microsoft.NETCore.App.Runtime.AOT.win-x64.Cross.android-x86 (x64)","8.0.5.0","Microsoft Corporation","20240702","MsiExec.exe /X{FE85A8AF-1BFA-4F7A-A58E-4F26BAD22C95}"
 "Aspire.Hosting.Sdk (x64)","8.0.0.0","Microsoft Corporation","20240702","MsiExec.exe /X{FFC80575-73CC-4DF6-BD9C-E0542E60C94B}"
 "Visual Studio Community 2022","17.10.3","Microsoft Corporation","20240702","""C:\Program Files (x86)\Microsoft Visual Studio\Installer\setup.exe"" uninstall --installPath ""C:\Program Files\Microsoft Visual Studio\2022\Community"""
-"Microsoft Edge","126.0.2592.87","Microsoft Corporation","20240704","""C:\Program Files (x86)\Microsoft\Edge\Application\126.0.2592.87\Installer\setup.exe"" --uninstall --msedge --channel=stable --system-level --verbose-logging"
+"Microsoft Edge","126.0.2592.102","Microsoft Corporation","20240713","""C:\Program Files (x86)\Microsoft\Edge\Application\126.0.2592.102\Installer\setup.exe"" --uninstall --msedge --channel=stable --system-level --verbose-logging"
 "Microsoft Edge Update","1.3.193.5",,,
 "Microsoft Edge WebView2 Runtime","126.0.2592.102","Microsoft Corporation","20240712","""C:\Program Files (x86)\Microsoft\EdgeWebView\Application\126.0.2592.102\Installer\setup.exe"" --uninstall --msedgewebview --system-level --verbose-logging"
 "Visual C++ Library CRT Desktop Appx Package","14.40.33811","Microsoft Corporation","20240702","MsiExec.exe /I{01AA2557-2373-44A8-83EE-A36BACDF9E37}"

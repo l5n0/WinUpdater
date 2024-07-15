@@ -60,7 +60,7 @@ namespace UpdateManagerApp
                     foreach (var line in lines)
                     {
                         var columns = line.Split(new[] { ' ' }, 5);
-                        if (columns.Length >= 2)
+                        if (columns.Length >= 2 && columns[0] != "Name" && columns[0] != "----")
                         {
                             applications.Add(new ApplicationInfo
                             {
@@ -109,7 +109,7 @@ namespace UpdateManagerApp
                     foreach (var line in lines)
                     {
                         var columns = line.Split(new[] { ' ' }, 5);
-                        if (columns.Length >= 2)
+                        if (columns.Length >= 2 && columns[0] != "Name" && columns[0] != "----")
                         {
                             drivers.Add(new DriverInfo
                             {
