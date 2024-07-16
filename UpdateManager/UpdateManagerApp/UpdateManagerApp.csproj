@@ -5,6 +5,7 @@
     <TargetFramework>net8.0-windows</TargetFramework>
     <Nullable>enable</Nullable>
     <UseWindowsForms>true</UseWindowsForms>
+    <UseWPF>true</UseWPF>
     <ImplicitUsings>enable</ImplicitUsings>
     <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
   </PropertyGroup>
@@ -17,13 +18,22 @@
     <Compile Include="Components\DiskUsageControl.cs" />
     <Compile Include="Components\UpdateApplicationsControl.cs" />
     <Compile Include="Components\UpdateDriversControl.cs" />
+    <Compile Include="Components\HomeControl.cs" />
     <Compile Include="MainForm.Designer.cs" />
     <Compile Include="Components\UpdateActions.cs" />
     <Compile Include="Program.cs" />
     <PackageReference Include="Microsoft.VisualBasic" Version="10.3.0" />
+    <PackageReference Include="LiveCharts.Wpf" Version="0.9.7" />
     <None Update="PowerShellScripts\*.ps1">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="WindowsFormsIntegration" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="WindowsBase" />
   </ItemGroup>
 
 </Project>

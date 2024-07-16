@@ -8,6 +8,12 @@ namespace UpdateManagerApp
         public MainForm()
         {
             InitializeComponent();
+            LoadHomeControl();
+        }
+
+        private void BtnHome_Click(object sender, EventArgs e)
+        {
+            LoadHomeControl();
         }
 
         private void BtnUpdateApplications_Click(object sender, EventArgs e)
@@ -25,11 +31,17 @@ namespace UpdateManagerApp
             LoadControl(new DiskUsageControl());
         }
 
+        private void LoadHomeControl()
+        {
+            LoadControl(new HomeControl());
+        }
+
         private void LoadControl(UserControl control)
         {
             this.contentPanel.Controls.Clear();
             control.Dock = DockStyle.Fill;
             this.contentPanel.Controls.Add(control);
         }
+
     }
 }

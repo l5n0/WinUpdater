@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
-using System.Linq;
 
 namespace UpdateManagerApp
 {
@@ -37,7 +36,7 @@ namespace UpdateManagerApp
         {
             var applications = new List<ApplicationInfo>();
             string scriptPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "PowerShellScripts", "GetInstalledApplications.ps1");
-            
+
             ProcessStartInfo startInfo = new ProcessStartInfo()
             {
                 FileName = "powershell.exe",
@@ -58,7 +57,7 @@ namespace UpdateManagerApp
 
                     foreach (var line in lines)
                     {
-                        var columns = line.Split(new[] { ' ' }, 5, StringSplitOptions.RemoveEmptyEntries);
+                        var columns = line.Split(new[] { ' ' }, 5);
                         if (columns.Length >= 2)
                         {
                             applications.Add(new ApplicationInfo
@@ -79,20 +78,24 @@ namespace UpdateManagerApp
                 }
             }
 
-            // Ensure unique applications by name, keeping the latest version
-            var uniqueApplications = applications
-                .GroupBy(app => app.Name)
-                .Select(group => group.OrderByDescending(app => app.CurrentVersion).First())
-                .ToList();
+            // Remove duplicate entries based on Name
+            var uniqueApplications = new Dictionary<string, ApplicationInfo>();
+            foreach (var app in applications)
+            {
+                if (!uniqueApplications.ContainsKey(app.Name))
+                {
+                    uniqueApplications.Add(app.Name, app);
+                }
+            }
 
-            return uniqueApplications;
+            return new List<ApplicationInfo>(uniqueApplications.Values);
         }
 
         public static List<DriverInfo> GetInstalledDrivers()
         {
             var drivers = new List<DriverInfo>();
             string scriptPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "PowerShellScripts", "GetInstalledDrivers.ps1");
-            
+
             ProcessStartInfo startInfo = new ProcessStartInfo()
             {
                 FileName = "powershell.exe",
@@ -113,13 +116,14 @@ namespace UpdateManagerApp
 
                     foreach (var line in lines)
                     {
-                        var columns = line.Split(new[] { ' ' }, 5, StringSplitOptions.RemoveEmptyEntries);
+                        var columns = line.Split(new[] { ' ' }, 5);
                         if (columns.Length >= 2)
                         {
                             drivers.Add(new DriverInfo
                             {
                                 Name = columns[0],
-                                CurrentVersion = columns[1]
+                                CurrentVersion = columns[1],
+                                IsUpToDate = true // Assuming you have logic to determine if up-to-date
                             });
                         }
                     }
@@ -134,13 +138,17 @@ namespace UpdateManagerApp
                 }
             }
 
-            // Ensure unique drivers by name, keeping the latest version
-            var uniqueDrivers = drivers
-                .GroupBy(driver => driver.Name)
-                .Select(group => group.OrderByDescending(driver => driver.CurrentVersion).First())
-                .ToList();
+            // Remove duplicate entries based on Name
+            var uniqueDrivers = new Dictionary<string, DriverInfo>();
+            foreach (var driver in drivers)
+            {
+                if (!uniqueDrivers.ContainsKey(driver.Name))
+                {
+                    uniqueDrivers.Add(driver.Name, driver);
+                }
+            }
 
-            return uniqueDrivers;
+            return new List<DriverInfo>(uniqueDrivers.Values);
         }
 
         private static void ExecuteUpdate(string scriptPath, string arguments = "")
@@ -181,5 +189,6 @@ namespace UpdateManagerApp
     {
         public string Name { get; set; } = string.Empty;
         public string CurrentVersion { get; set; } = string.Empty;
+        public bool IsUpToDate { get; set; }
     }
 }

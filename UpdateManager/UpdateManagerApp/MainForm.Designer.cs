@@ -5,6 +5,7 @@ namespace UpdateManagerApp
         private System.ComponentModel.IContainer components = null;
         private System.Windows.Forms.Panel sidebarPanel;
         private System.Windows.Forms.Panel contentPanel;
+        private System.Windows.Forms.Button btnHome;
         private System.Windows.Forms.Button btnUpdateApplications;
         private System.Windows.Forms.Button btnUpdateDrivers;
         private System.Windows.Forms.Button btnDiskUsage;
@@ -32,6 +33,7 @@ namespace UpdateManagerApp
         {
             this.sidebarPanel = new System.Windows.Forms.Panel();
             this.contentPanel = new System.Windows.Forms.Panel();
+            this.btnHome = new System.Windows.Forms.Button();
             this.btnUpdateApplications = new System.Windows.Forms.Button();
             this.btnUpdateDrivers = new System.Windows.Forms.Button();
             this.btnDiskUsage = new System.Windows.Forms.Button();
@@ -40,6 +42,7 @@ namespace UpdateManagerApp
             // 
             // sidebarPanel
             // 
+            this.sidebarPanel.Controls.Add(this.btnHome);
             this.sidebarPanel.Controls.Add(this.btnUpdateApplications);
             this.sidebarPanel.Controls.Add(this.btnUpdateDrivers);
             this.sidebarPanel.Controls.Add(this.btnDiskUsage);
@@ -57,13 +60,24 @@ namespace UpdateManagerApp
             this.contentPanel.Size = new System.Drawing.Size(600, 600);
             this.contentPanel.TabIndex = 1;
             // 
+            // btnHome
+            // 
+            this.btnHome.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btnHome.Location = new System.Drawing.Point(0, 0);
+            this.btnHome.Name = "btnHome";
+            this.btnHome.Size = new System.Drawing.Size(200, 50);
+            this.btnHome.TabIndex = 0;
+            this.btnHome.Text = "Home";
+            this.btnHome.UseVisualStyleBackColor = true;
+            this.btnHome.Click += new System.EventHandler(this.BtnHome_Click);
+            // 
             // btnUpdateApplications
             // 
             this.btnUpdateApplications.Dock = System.Windows.Forms.DockStyle.Top;
-            this.btnUpdateApplications.Location = new System.Drawing.Point(0, 0);
+            this.btnUpdateApplications.Location = new System.Drawing.Point(0, 50);
             this.btnUpdateApplications.Name = "btnUpdateApplications";
             this.btnUpdateApplications.Size = new System.Drawing.Size(200, 50);
-            this.btnUpdateApplications.TabIndex = 0;
+            this.btnUpdateApplications.TabIndex = 1;
             this.btnUpdateApplications.Text = "Update Applications";
             this.btnUpdateApplications.UseVisualStyleBackColor = true;
             this.btnUpdateApplications.Click += new System.EventHandler(this.BtnUpdateApplications_Click);
@@ -71,10 +85,10 @@ namespace UpdateManagerApp
             // btnUpdateDrivers
             // 
             this.btnUpdateDrivers.Dock = System.Windows.Forms.DockStyle.Top;
-            this.btnUpdateDrivers.Location = new System.Drawing.Point(0, 50);
+            this.btnUpdateDrivers.Location = new System.Drawing.Point(0, 100);
             this.btnUpdateDrivers.Name = "btnUpdateDrivers";
             this.btnUpdateDrivers.Size = new System.Drawing.Size(200, 50);
-            this.btnUpdateDrivers.TabIndex = 1;
+            this.btnUpdateDrivers.TabIndex = 2;
             this.btnUpdateDrivers.Text = "Update Drivers";
             this.btnUpdateDrivers.UseVisualStyleBackColor = true;
             this.btnUpdateDrivers.Click += new System.EventHandler(this.BtnUpdateDrivers_Click);
@@ -82,10 +96,10 @@ namespace UpdateManagerApp
             // btnDiskUsage
             // 
             this.btnDiskUsage.Dock = System.Windows.Forms.DockStyle.Top;
-            this.btnDiskUsage.Location = new System.Drawing.Point(0, 100);
+            this.btnDiskUsage.Location = new System.Drawing.Point(0, 150);
             this.btnDiskUsage.Name = "btnDiskUsage";
             this.btnDiskUsage.Size = new System.Drawing.Size(200, 50);
-            this.btnDiskUsage.TabIndex = 2;
+            this.btnDiskUsage.TabIndex = 3;
             this.btnDiskUsage.Text = "Disk Usage";
             this.btnDiskUsage.UseVisualStyleBackColor = true;
             this.btnDiskUsage.Click += new System.EventHandler(this.BtnDiskUsage_Click);
@@ -101,6 +115,17 @@ namespace UpdateManagerApp
             this.Text = "Update Manager";
             this.sidebarPanel.ResumeLayout(false);
             this.ResumeLayout(false);
+
+            // Add the btnHome and its event handler
+            this.btnHome = new System.Windows.Forms.Button();
+            this.btnHome.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btnHome.Location = new System.Drawing.Point(0, 0);
+            this.btnHome.Name = "btnHome";
+            this.btnHome.Size = new System.Drawing.Size(200, 50);
+            this.btnHome.TabIndex = 0;
+            this.btnHome.Text = "Home";
+            this.btnHome.UseVisualStyleBackColor = true;
+            this.btnHome.Click += new System.EventHandler(this.BtnHome_Click);
 
         }
 

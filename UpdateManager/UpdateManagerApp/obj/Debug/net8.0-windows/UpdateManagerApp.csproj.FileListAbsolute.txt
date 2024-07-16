@@ -19,3 +19,7 @@ C:\Users\Administrator\Documents\GitHub\WinUpdater\UpdateManager\UpdateManagerAp
 C:\Users\Administrator\Documents\GitHub\WinUpdater\UpdateManager\UpdateManagerApp\bin\Debug\net8.0-windows\PowerShellScripts\UpdateAllDrivers.ps1
 C:\Users\Administrator\Documents\GitHub\WinUpdater\UpdateManager\UpdateManagerApp\bin\Debug\net8.0-windows\PowerShellScripts\UpdateSpecificDriver.ps1
 C:\Users\Administrator\Documents\GitHub\WinUpdater\UpdateManager\UpdateManagerApp\bin\Debug\net8.0-windows\PowerShellScripts\GetInstalledDrivers.ps1
+C:\Users\Administrator\Documents\GitHub\WinUpdater\UpdateManager\UpdateManagerApp\obj\Debug\net8.0-windows\UpdateManagerApp.csproj.AssemblyReference.cache
+C:\Users\Administrator\Documents\GitHub\WinUpdater\UpdateManager\UpdateManagerApp\bin\Debug\net8.0-windows\LiveCharts.dll
+C:\Users\Administrator\Documents\GitHub\WinUpdater\UpdateManager\UpdateManagerApp\bin\Debug\net8.0-windows\LiveCharts.Wpf.dll
+C:\Users\Administrator\Documents\GitHub\WinUpdater\UpdateManager\UpdateManagerApp\obj\Debug\net8.0-windows\UpdateMa.CB700E6B.Up2Date
